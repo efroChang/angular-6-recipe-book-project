@@ -6,5 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  
+  displayRecipes: boolean = true;
+  displayShoppingList: boolean = false;
+
+  onFeatureSelected(selectedFeature: string)
+  {
+    if ( 'recipes' === selectedFeature )
+    {
+      this.displayRecipes = true;
+      this.displayShoppingList = false;
+    }
+    else if ( 'shopping-list' === selectedFeature )
+    {
+      this.displayRecipes = false;
+      this.displayShoppingList = true;
+    }    
+
+    console.log( this.displayRecipes );
+  }
 }
