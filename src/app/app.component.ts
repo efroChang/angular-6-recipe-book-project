@@ -22,7 +22,5 @@ export class AppComponent {
       this.displayRecipes = false;
       this.displayShoppingList = true;
     }    
-
-    console.log( this.displayRecipes );
   }
 }
