@@ -21,4 +21,17 @@ export class ShoppingListService
         this.ingredients.push( ingredient );
         this.ingredientChanged.emit( this.ingredients.slice() );
     }
+
+    addIngredients( ingredients: Ingredient[] )
+    {
+        // Awesome new way in ES6 to convert an array to a list of objects:
+        this.ingredients.push( ...ingredients );    // [KEY]: "..." converts an array to a list
+        this.ingredientChanged.emit( this.ingredients.slice() ); 
+
+        // Too many Event broacasting...
+        // for( let ingredient of ingredients )
+        // {
+        //     this.addIngredient( ingredient );
+        // }
+    }
 }
