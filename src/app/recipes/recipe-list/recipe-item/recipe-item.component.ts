@@ -11,6 +11,8 @@ export class RecipeItemComponent implements OnInit {
 
   @Input() recipeItem: Recipe;
 
+  @Input() index: number;       // To store Recipe Index.  Will be passed in from HTML
+
   ngOnInit() {
   }
 
