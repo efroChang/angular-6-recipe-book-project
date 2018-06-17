@@ -1,9 +1,10 @@
 import { Ingredient } from "../shared/ingredient.model";
 import { Output, EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
 
 export class ShoppingListService
 {
-    @Output() ingredientChanged = new EventEmitter<Ingredient[]>();
+    ingredientChanged = new Subject<Ingredient[]>();
 
     private ingredients: Ingredient[] = 
     [
@@ -19,14 +20,14 @@ export class ShoppingListService
     addIngredient( ingredient: Ingredient )
     {
         this.ingredients.push( ingredient );
-        this.ingredientChanged.emit( this.ingredients.slice() );
+        this.ingredientChanged.next( this.ingredients.slice() );
     }
 
     addIngredients( ingredients: Ingredient[] )
     {
         // Awesome new way in ES6 to convert an array to a list of objects:
         this.ingredients.push( ...ingredients );    // [KEY]: "..." converts an array to a list
-        this.ingredientChanged.emit( this.ingredients.slice() ); 
+        this.ingredientChanged.next( this.ingredients.slice() ); 
 
         // Too many Event broacasting...
         // for( let ingredient of ingredients )
