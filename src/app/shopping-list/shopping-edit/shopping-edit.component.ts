@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -10,9 +11,29 @@ import { NgForm } from '@angular/forms';
 })
 export class ShoppingEditComponent implements OnInit {
 
+  @ViewChild('f') shoppingListForm: NgForm;             // [KEY]: To access the Form 'f' from component
+
+  subscription: Subscription;
+  editMode = false;
+  editedItemIndex: number;
+  editedItem: Ingredient;
+
   constructor( private shoppingListService: ShoppingListService ) { }
 
   ngOnInit() {
+    this.subscription = this.shoppingListService.startEditing.subscribe(
+      ( index: number ) => {
+        this.editMode = true;
+        this.editedItemIndex = index;
+        this.editedItem = this.shoppingListService.getIngredient(index);
+
+        // Populate the Form with ingredient info
+        this.shoppingListForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount
+        });
+      }
+    );
   }
 
   onAddIngredient(form: NgForm)     // [KEY]: Receive the NgForm object

@@ -6,6 +6,8 @@ export class ShoppingListService
 {
     ingredientChanged = new Subject<Ingredient[]>();
 
+    startEditing = new Subject<number>();
+
     private ingredients: Ingredient[] = 
     [
       new Ingredient('Apple', 5),
@@ -15,6 +17,10 @@ export class ShoppingListService
     getIngredients()
     {
         return this.ingredients.slice();
+    }
+
+    getIngredient( index: number ) {
+        return this.ingredients[index];
     }
 
     addIngredient( ingredient: Ingredient )
