@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './shopping-edit.component.html',
   styleUrls: ['./shopping-edit.component.css']
 })
-export class ShoppingEditComponent implements OnInit {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('f') shoppingListForm: NgForm;             // [KEY]: To access the Form 'f' from component
 
@@ -42,5 +42,9 @@ export class ShoppingEditComponent implements OnInit {
     const ingredient = new Ingredient( formValue.name, formValue.amount );
 
     this.shoppingListService.addIngredient( ingredient );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
