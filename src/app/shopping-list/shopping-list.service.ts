@@ -45,4 +45,9 @@ export class ShoppingListService
         //     this.addIngredient( ingredient );
         // }
     }
+
+    deleteIngredient( index: number ) {
+        this.ingredients.splice( index, 1 );
+        this.ingredientChanged.next( this.ingredients.slice() );
+    }
 }
