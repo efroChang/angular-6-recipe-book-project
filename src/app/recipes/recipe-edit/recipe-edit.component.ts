@@ -26,7 +26,7 @@ export class RecipeEditComponent implements OnInit {
         ( params: Params ) => 
         {
           this.id = +params[ 'id' ];
-          this.editMode = this.id != null;
+          this.editMode = !Number.isNaN(this.id);   // If "Not a Number", it is a New Mode.
 
           // Init the Form
           this.initForm();
@@ -46,7 +46,7 @@ export class RecipeEditComponent implements OnInit {
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
 
-      if ( recipe.ingredients ) {
+      if ( recipe['ingredients'] ) {
         for ( let ingredient of recipe.ingredients ) {
           recipeIngredients.push( new FormGroup({           // [KEY]: Push FormGroup into FormArray
             'name': new FormControl(ingredient.name, Validators.required),
