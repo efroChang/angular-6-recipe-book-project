@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '../../../../node_modules/@angular/forms';
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -66,10 +67,6 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    console.log(this.recipeForm);
-  }
-
   onAddIngredient() {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
@@ -80,5 +77,24 @@ export class RecipeEditComponent implements OnInit {
         ])
       })
     );
+  }
+
+  onSubmit() {
+    console.log(this.recipeForm);
+
+    // const recipe = new Recipe(
+    //   this.recipeForm.value['name'],
+    //   this.recipeForm.value['description'],
+    //   this.recipeForm.value['imagePath'],
+    //   this.recipeForm.value['ingredients']
+    // );
+
+    if (this.editMode) {
+      // this.recipeService.updateRecipe(this.id, recipe);
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value);    // [KEY]: Pass in the Form.value as Recipe object when the fields matches.
+    } else {
+      // this.recipeService.addRecipe(recipe);
+      this.recipeService.addRecipe(this.recipeForm.value);
+    }
   }
 }

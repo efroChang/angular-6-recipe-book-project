@@ -19,7 +19,14 @@ export class RecipeListComponent implements OnInit {
                private route: ActivatedRoute ) {}           // [KEY]: to identify current route
 
   ngOnInit() 
-  {
+  { 
+    // [KEY]: To subscribe to the RecipeChanged event from RecipeService and update the local copy
+    this.recipeService.recipeChanged.subscribe(
+      (updatedRecipes: Recipe[]) => {
+        this.recipes = updatedRecipes;
+      }
+    );
+
     this.recipes = this.recipeService.getRecipes();
   }
 
