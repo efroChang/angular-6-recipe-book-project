@@ -61,4 +61,9 @@ export class RecipeService
         this.recipes[index] = updatedRecipe;
         this.recipeChanged.next(this.recipes.slice());  // [KEY]: To broadcast the new version of the Recipe array.
     }
+
+    deleteRecipe( index: number ) {
+        this.recipes.splice(index, 1);
+        this.recipeChanged.next(this.recipes.slice());  // [KEY]: To broadcast the new version of the Recipe array.
+    }
 }
