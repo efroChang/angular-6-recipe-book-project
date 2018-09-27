@@ -36,6 +36,11 @@ export class RecipeService
 
     constructor( private shoppingListService: ShoppingListService ) {}
 
+    setRecipes(recipes: Array<Recipe>) {
+        this.recipes = recipes;
+        this.recipeChanged.next( this.recipes.slice() );
+    }
+
     // To get a COPY of the Recipe array
     getRecipes() 
     {
