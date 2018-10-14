@@ -1,7 +1,12 @@
 import * as firebase from 'firebase';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
+@Injectable()
 export class AuthService {
     private token: string;
+
+    constructor(private router: Router) {}
 
     public signupUser(email: string, password: string) {
 
@@ -16,6 +21,8 @@ export class AuthService {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(
                 response => {
+                    this.router.navigate(['/']);                            // [KEY]: Route to the home page
+
                     firebase.auth().currentUser.getIdToken()                // [KEY]: Get and store current AWT token right away.
                         .then(
                             (token: string) => this.token = token
