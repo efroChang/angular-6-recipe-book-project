@@ -31,12 +31,17 @@ export class AuthService {
         firebase.auth().currentUser.getIdToken()
             .then(
                 (token: string) => this.token = token                       // [KEY]: Update the local token
-            )
+            );
 
         return this.token;                                                  // [KEY]: But return the local copy w/o waiting for the update
     }
 
     public isAuthenticated(): boolean {
         return this.token != null;
+    }
+
+    public logout() {
+        firebase.auth().signOut();
+        this.token = null;
     }
 }
