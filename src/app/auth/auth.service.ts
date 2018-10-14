@@ -35,4 +35,8 @@ export class AuthService {
 
         return this.token;                                                  // [KEY]: But return the local copy w/o waiting for the update
     }
+
+    public isAuthenticated(): boolean {
+        return this.token != null;
+    }
 }
