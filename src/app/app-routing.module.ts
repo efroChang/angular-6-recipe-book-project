@@ -8,6 +8,8 @@ const appRoutes: Routes =
 [
     { path: '', component: HomeComponent },
 
+    { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},      // [KEY]: Enable "Lazy Loading"!!! 
+
     { path: 'shopping-list', component: ShoppingListComponent }
 ];
 

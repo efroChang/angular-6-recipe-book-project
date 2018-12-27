@@ -25,7 +25,6 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,              // [KEY] "BrowserModule" already contains "CommonModule"
     HttpModule,
-    RecipesModule,              // [KEY] Need to be BEFORE "AppRoutingModule"
     AppRoutingModule,
     SharedModule,
     ShoppingListModule,
