@@ -27,4 +27,8 @@ export class HeaderComponent {
   public onLogout() {
     this.authService.logout();
   }
+
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
+  }
 }

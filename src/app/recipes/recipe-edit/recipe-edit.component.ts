@@ -109,6 +109,10 @@ export class RecipeEditComponent implements OnInit {
     this.naviateBackUpALevel();
   }
 
+  public getControls() {
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+  }
+
   private naviateBackUpALevel() {
     this.router.navigate(
       ['../'],
