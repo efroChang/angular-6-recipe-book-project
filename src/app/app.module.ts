@@ -27,7 +27,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     AppRoutingModule,
     SharedModule,
-    ShoppingListModule,
+    SharedModule,
     AuthModule
   ],
   providers: [
