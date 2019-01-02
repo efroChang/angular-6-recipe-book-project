@@ -17,9 +17,18 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                 ...state,                       // [KEY]: "...state" is to copy all the props in "state" object
                 ingredients: [                  // [KEY]: "ingredients" will overwrite "state.ingreidnets" prop values
                     ...state.ingredients,       // [KEY]: "...state.ingredients" is to copy all the "ingredients" array elements from "state"
-                    action.payload              // [KEY]: To append the new Ingredient from the "payload" property
+                    (<ShoppingListActions.AddIngredient>action).payload         // [KEY]: To append the new Ingredient from the "payload" property
                 ]
-            }
+            };
+        
+        case ShoppingListActions.ADD_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: [
+                    ...state.ingredients,
+                    ...(<ShoppingListActions.AddIngredients>action).payload     // [KEY]: Use "..." here because the Payload is an array.
+                ]
+            };
 
         default:
             return state;
