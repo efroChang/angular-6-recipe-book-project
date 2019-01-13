@@ -6,6 +6,7 @@ import { Ingredient } from "src/app/shared/ingredient.model";
 // --------------------------------------------------
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
+export const UPDATE_INGREDIENT = 'UPDATE_INGREDIENT';
 
 // --------------------------------------------------
 // 2. Define Action Class with Payload (data)
@@ -22,8 +23,17 @@ export class AddIngredients implements Action {
     constructor(public payload: Array<Ingredient>) {}
 }
 
+export class UpdateIngredient implements Action {
+    public type = UPDATE_INGREDIENT;
+
+    constructor(public payload: {index: number, ingredient: Ingredient}) {}
+}
+
 // --------------------------------------------------
 // 3. Export Type
 // --------------------------------------------------
 // [KEY] Use the UNION "|" to append to the TYPE
-export type ShoppingListActions = AddIngredient | AddIngredients;
+export type ShoppingListActions = 
+    AddIngredient | 
+    AddIngredients |
+    UpdateIngredient;

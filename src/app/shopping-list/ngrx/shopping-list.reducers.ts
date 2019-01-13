@@ -29,6 +29,21 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                     ...(<ShoppingListActions.AddIngredients>action).payload     // [KEY]: Use "..." here because the Payload is an array.
                 ]
             };
+        
+        case ShoppingListActions.UPDATE_INGREDIENT:
+            const index: number = (<ShoppingListActions.UpdateIngredient>action).payload.index;
+            const currentIngredient: Ingredient = state.ingredients[index];
+            // [KEY]: The immutable way to copy all propertis from Action to create a new Ingredient:
+            const updatedIngredient: Ingredient = {
+                ...currentIngredient,
+                ...(<ShoppingListActions.UpdateIngredient>action).payload.ingredient
+            };
+            const ingredients: Array<Ingredient> = [...state.ingredients];
+            ingredients[index] = updatedIngredient;
+            return {
+                ...state,
+                ingredients: ingredients
+            };
 
         default:
             return state;
